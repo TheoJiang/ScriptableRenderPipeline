@@ -89,6 +89,12 @@ namespace UnityEngine.Rendering.HighDefinition
         /// <param name="rayValues">Specifes which ray count value should be returned.</param>
         /// <returns>The approximated ray count for a frame</returns>
         public uint GetRaysPerFrame(RayCountValues rayValues) { return m_RayCountManager.GetRaysPerFrame(rayValues); }
+
+        /// <summary>
+        /// This function allows the user to query the currently active ray tracing Tier.
+        /// </summary>
+        /// <returns>The currently active ray tracing Tier</returns>
+        public RenderPipelineSettings.RaytracingTier GetRayTracingTier() { return m_Asset.currentPlatformRenderPipelineSettings.supportedRaytracingTier; }
 #endif
 
         // Renderer Bake configuration can vary depends on if shadow mask is enabled or no

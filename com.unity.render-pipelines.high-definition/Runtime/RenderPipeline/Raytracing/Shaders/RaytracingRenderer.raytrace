@@ -88,7 +88,8 @@ void RayGenRenderer()
 
     if (_RayCountEnabled > 0)
     {
-        _RayCountTexture[COORD_TEXTURE2D_X(currentPixelCoord)][RAYCOUNTVALUES_FORWARD] = _RayCountTexture[COORD_TEXTURE2D_X(currentPixelCoord)][RAYCOUNTVALUES_FORWARD] + rayIntersection.rayCount;
+        //_RayCountTexture[COORD_TEXTURE2D_X(currentPixelCoord)][RAYCOUNTVALUES_REFLECTION] = _RayCountTexture[COORD_TEXTURE2D_X(currentPixelCoord)][RAYCOUNTVALUES_REFLECTION] + rayIntersection.rayCount;
+        InterlockedAdd(_RayCountBuffer[RAYCOUNTVALUES_RECURSIVE], rayIntersection.rayCount);
     }
 
 	// Alright we are done :D 

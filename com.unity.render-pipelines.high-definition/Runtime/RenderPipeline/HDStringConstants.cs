@@ -635,6 +635,7 @@ namespace UnityEngine.Rendering.HighDefinition
         // Ray count
         public static readonly int _RayCountEnabled                 = Shader.PropertyToID("_RayCountEnabled");
         public static readonly int _RayCountTexture                 = Shader.PropertyToID("_RayCountTexture");
+        public static readonly int _RayCountBuffer                  = Shader.PropertyToID("_RayCountBuffer");
         public static readonly int _InputRayCountTexture            = Shader.PropertyToID("_InputRayCountTexture");
         public static readonly int _InputRayCountBuffer             = Shader.PropertyToID("_InputRayCountBuffer");
         public static readonly int _OutputRayCountBuffer            = Shader.PropertyToID("_OutputRayCountBuffer");

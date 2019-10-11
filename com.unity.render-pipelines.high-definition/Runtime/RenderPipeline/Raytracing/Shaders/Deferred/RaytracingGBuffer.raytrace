@@ -105,7 +105,8 @@ void RayGenGBuffer()
 
     if (_RayCountEnabled > 0)
     {
-        _RayCountTexture[COORD_TEXTURE2D_X(currentPixelCoord)][RAYCOUNTVALUES_GBUFFER] = _RayCountTexture[COORD_TEXTURE2D_X(currentPixelCoord)][RAYCOUNTVALUES_GBUFFER] + 1;
+        _RayCountTexture[COORD_TEXTURE2D_X(currentPixelCoord)][RAYCOUNTVALUES_REFLECTION] = _RayCountTexture[COORD_TEXTURE2D_X(currentPixelCoord)][RAYCOUNTVALUES_REFLECTION] + 1;
+        InterlockedAdd(_RayCountBuffer[RAYCOUNTVALUES_REFLECTION], 1);
     }
 
     // Read the ray distance
@@ -209,7 +210,8 @@ void RayGenGBufferBinned()
 
     if (_RayCountEnabled > 0)
     {
-        _RayCountTexture[COORD_TEXTURE2D_X(currentPixelCoord)][RAYCOUNTVALUES_GBUFFER] = _RayCountTexture[COORD_TEXTURE2D_X(currentPixelCoord)][RAYCOUNTVALUES_GBUFFER] + 1;
+        _RayCountTexture[COORD_TEXTURE2D_X(currentPixelCoord)][RAYCOUNTVALUES_REFLECTION] = _RayCountTexture[COORD_TEXTURE2D_X(currentPixelCoord)][RAYCOUNTVALUES_REFLECTION] + 1;
+        InterlockedAdd(_RayCountBuffer[RAYCOUNTVALUES_REFLECTION], 1);
     }
     
     // Read the ray distance

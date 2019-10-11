@@ -21,3 +21,4 @@ float                                   _RaytracingCameraNearPlane;
 uint                                    _RaytracingDiffuseRay;
 int                                     _RaytracingPreExposition;
 RW_TEXTURE2D_X(uint4,                   _RayCountTexture);
+RWStructuredBuffer<uint>                _RayCountBuffer;

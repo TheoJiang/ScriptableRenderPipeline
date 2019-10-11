@@ -57,6 +57,7 @@ namespace UnityEngine.Rendering.HighDefinition
 
             // Debug textures
             public RTHandle rayCountTexture;
+            public ComputeBuffer rayCountBuffer;
 
             // Output Buffer
             public RTHandle litBuffer;
@@ -124,6 +125,7 @@ namespace UnityEngine.Rendering.HighDefinition
 
             // Debug textures
             deferredResources.rayCountTexture = m_RayCountManager.GetRayCountTexture();
+            deferredResources.rayCountBuffer = m_RayCountManager.GetRayCountBuffer();
 
             // Output Buffer
             deferredResources.litBuffer = ouputBuffer;
@@ -214,7 +216,8 @@ namespace UnityEngine.Rendering.HighDefinition
             // Set ray count tex
             cmd.SetRayTracingIntParam(parameters.gBufferRaytracingRT, HDShaderIDs._RayCountEnabled, parameters.rayCountFlag);
             cmd.SetRayTracingTextureParam(parameters.gBufferRaytracingRT, HDShaderIDs._RayCountTexture, buffers.rayCountTexture);
-            
+            cmd.SetRayTracingBufferParam(parameters.gBufferRaytracingRT, HDShaderIDs._RayCountBuffer, buffers.rayCountBuffer);
+
             // Bind all input parameter
             cmd.SetRayTracingFloatParams(parameters.gBufferRaytracingRT, HDShaderIDs._RaytracingRayBias, parameters.rayBias);
             cmd.SetRayTracingIntParams(parameters.gBufferRaytracingRT, HDShaderIDs._RayTracingLayerMask, parameters.layerMask);

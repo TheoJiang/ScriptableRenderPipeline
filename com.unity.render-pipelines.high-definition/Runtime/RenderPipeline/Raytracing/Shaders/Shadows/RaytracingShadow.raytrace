@@ -183,7 +183,8 @@ void RayGenAreaShadows()
 
         if (_RayCountEnabled > 0)
         {
-            _RayCountTexture[COORD_TEXTURE2D_X(currentPixelCoord)][RAYCOUNTVALUES_VISIBILITY] = _RayCountTexture[COORD_TEXTURE2D_X(currentPixelCoord)][RAYCOUNTVALUES_VISIBILITY] + 1;
+            _RayCountTexture[COORD_TEXTURE2D_X(currentPixelCoord)][RAYCOUNTVALUES_SHADOW] = _RayCountTexture[COORD_TEXTURE2D_X(currentPixelCoord)][RAYCOUNTVALUES_SHADOW] + 1;
+            InterlockedAdd(_RayCountBuffer[RAYCOUNTVALUES_SHADOW], 1);
         }
 
         // Let's shift the origin and destination positions by a bias
@@ -297,7 +298,8 @@ void RayGenAreaShadowSingle()
 
     if (_RayCountEnabled > 0)
     {
-        _RayCountTexture[COORD_TEXTURE2D_X(currentPixelCoord)][RAYCOUNTVALUES_VISIBILITY] = _RayCountTexture[COORD_TEXTURE2D_X(currentPixelCoord)][RAYCOUNTVALUES_VISIBILITY] + 1;
+        _RayCountTexture[COORD_TEXTURE2D_X(currentPixelCoord)][RAYCOUNTVALUES_SHADOW] = _RayCountTexture[COORD_TEXTURE2D_X(currentPixelCoord)][RAYCOUNTVALUES_SHADOW] + 1;
+        InterlockedAdd(_RayCountBuffer[RAYCOUNTVALUES_SHADOW], 1);
     }
 
     // Fetch the data of the area light
@@ -366,7 +368,8 @@ void RayGenDirectionalShadowSingle()
 
     if (_RayCountEnabled > 0)
     {
-        _RayCountTexture[COORD_TEXTURE2D_X(currentPixelCoord)][RAYCOUNTVALUES_VISIBILITY] = _RayCountTexture[COORD_TEXTURE2D_X(currentPixelCoord)][RAYCOUNTVALUES_VISIBILITY] + 1;
+        _RayCountTexture[COORD_TEXTURE2D_X(currentPixelCoord)][RAYCOUNTVALUES_SHADOW] = _RayCountTexture[COORD_TEXTURE2D_X(currentPixelCoord)][RAYCOUNTVALUES_SHADOW] + 1;
+        InterlockedAdd(_RayCountBuffer[RAYCOUNTVALUES_SHADOW], 1);
     }
 
     // Compute the position input structure
@@ -438,7 +441,11 @@ void RayGenShadowSegmentSingle()
 
     // Make sure it is taken into account in the ray conters
     if (_RayCountEnabled > 0)
-        _RayCountTexture[COORD_TEXTURE2D_X(currentPixelCoord)][RAYCOUNTVALUES_VISIBILITY] = _RayCountTexture[COORD_TEXTURE2D_X(currentPixelCoord)][RAYCOUNTVALUES_VISIBILITY] + 1;
+    {
+        _RayCountTexture[COORD_TEXTURE2D_X(currentPixelCoord)][RAYCOUNTVALUES_SHADOW] = _RayCountTexture[COORD_TEXTURE2D_X(currentPixelCoord)][RAYCOUNTVALUES_SHADOW] + 1;
+        InterlockedAdd(_RayCountBuffer[RAYCOUNTVALUES_SHADOW], 1);
+    }
+
 
     // Compute the world space position of the source pixel
     PositionInputs posInput = GetPositionInput(currentPixelCoord, _ScreenSize.zw, depthValue, UNITY_MATRIX_I_VP, GetWorldToViewMatrix(), 0);

@@ -76,7 +76,8 @@ void RayGenFullRes()
 
     if (_RayCountEnabled > 0)
     {
-        _RayCountTexture[COORD_TEXTURE2D_X(currentCoord)][RAYCOUNTVALUES_INDIRECT] = _RayCountTexture[COORD_TEXTURE2D_X(currentCoord)][RAYCOUNTVALUES_INDIRECT] + 1;
+        _RayCountTexture[COORD_TEXTURE2D_X(currentCoord)][RAYCOUNTVALUES_DIFFUSE_GI] = _RayCountTexture[COORD_TEXTURE2D_X(currentCoord)][RAYCOUNTVALUES_DIFFUSE_GI] + 1;
+        InterlockedAdd(_RayCountBuffer[RAYCOUNTVALUES_DIFFUSE_GI], 1);
     }
     
     // Generate a new sample
@@ -162,7 +163,8 @@ void RayGenIntegration()
 
     if (_RayCountEnabled > 0)
     {
-        _RayCountTexture[COORD_TEXTURE2D_X(currentCoord)][RAYCOUNTVALUES_INDIRECT] = _RayCountTexture[COORD_TEXTURE2D_X(currentCoord)][RAYCOUNTVALUES_INDIRECT] + 1;
+        _RayCountTexture[COORD_TEXTURE2D_X(currentCoord)][RAYCOUNTVALUES_DIFFUSE_GI] = _RayCountTexture[COORD_TEXTURE2D_X(currentCoord)][RAYCOUNTVALUES_DIFFUSE_GI] + _RaytracingNumSamples;
+        InterlockedAdd(_RayCountBuffer[RAYCOUNTVALUES_DIFFUSE_GI], _RaytracingNumSamples);
     }
 
     // Loop through the samples and add their contribution

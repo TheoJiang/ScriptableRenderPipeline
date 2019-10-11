@@ -89,6 +89,7 @@ namespace UnityEngine.Rendering.HighDefinition
             RayCountManager rayCountManager = GetRayCountManager();
             cmd.SetRayTracingIntParam(reflectionShader, HDShaderIDs._RayCountEnabled, rayCountManager.RayCountIsEnabled());
             cmd.SetRayTracingTextureParam(reflectionShader, HDShaderIDs._RayCountTexture, rayCountManager.GetRayCountTexture());
+            cmd.SetRayTracingBufferParam(reflectionShader, HDShaderIDs._RayCountBuffer, rayCountManager.GetRayCountBuffer());
 
             // Compute the pixel spread value
             float pixelSpreadAngle = Mathf.Atan(2.0f * Mathf.Tan(hdCamera.camera.fieldOfView * Mathf.PI / 360.0f) / Mathf.Min(hdCamera.actualWidth, hdCamera.actualHeight));

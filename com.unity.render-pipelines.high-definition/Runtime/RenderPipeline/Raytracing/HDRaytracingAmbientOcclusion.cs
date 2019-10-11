@@ -108,6 +108,7 @@ namespace UnityEngine.Rendering.HighDefinition
                 RayCountManager rayCountManager = m_RenderPipeline.GetRayCountManager();
                 cmd.SetRayTracingIntParam(aoShader, HDShaderIDs._RayCountEnabled, rayCountManager.RayCountIsEnabled());
                 cmd.SetRayTracingTextureParam(aoShader, HDShaderIDs._RayCountTexture, rayCountManager.GetRayCountTexture());
+                cmd.SetRayTracingBufferParam(aoShader, HDShaderIDs._RayCountBuffer, rayCountManager.GetRayCountBuffer());
 
                 // Set the output textures
                 cmd.SetRayTracingTextureParam(aoShader, HDShaderIDs._AmbientOcclusionTextureRW, m_AOIntermediateBuffer0);
