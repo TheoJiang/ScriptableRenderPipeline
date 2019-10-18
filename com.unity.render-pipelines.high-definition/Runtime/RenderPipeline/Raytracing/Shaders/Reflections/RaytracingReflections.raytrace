@@ -152,8 +152,7 @@ void RayGenReflectionHalfRes()
 
     if (_RayCountEnabled > 0)
     {
-        _RayCountTexture[COORD_TEXTURE2D_X(outputCoord)][RAYCOUNTVALUES_REFLECTION] = _RayCountTexture[COORD_TEXTURE2D_X(outputCoord)][RAYCOUNTVALUES_REFLECTION] + 1;
-        InterlockedAdd(_RayCountBuffer[RAYCOUNTVALUES_REFLECTION], 1);
+        InterlockedAdd(_RayCountBuffer[RAYCOUNTVALUES_REFLECTION_FORWARD], 1);
     }
 
     // Evaluate the ray intersection
@@ -268,8 +267,7 @@ void RayGenReflectionFullRes()
 
     if (_RayCountEnabled > 0)
     {
-        _RayCountTexture[COORD_TEXTURE2D_X(currentCoord)][RAYCOUNTVALUES_REFLECTION] = _RayCountTexture[COORD_TEXTURE2D_X(currentCoord)][RAYCOUNTVALUES_REFLECTION] + 1;
-        InterlockedAdd(_RayCountBuffer[RAYCOUNTVALUES_REFLECTION], 1);
+        InterlockedAdd(_RayCountBuffer[RAYCOUNTVALUES_REFLECTION_FORWARD], 1);
     }
 
     // Evaluate the ray intersection
@@ -369,8 +367,7 @@ void RayGenIntegration()
 
         if (_RayCountEnabled > 0)
         {
-            _RayCountTexture[COORD_TEXTURE2D_X(currentCoord)][RAYCOUNTVALUES_REFLECTION] = _RayCountTexture[COORD_TEXTURE2D_X(currentCoord)][RAYCOUNTVALUES_REFLECTION] + 1;
-            InterlockedAdd(_RayCountBuffer[RAYCOUNTVALUES_REFLECTION], 1);
+            InterlockedAdd(_RayCountBuffer[RAYCOUNTVALUES_REFLECTION_FORWARD], 1);
         }
 
         // Create the ray descriptor for this pixel

@@ -62,7 +62,6 @@ void RayGenAmbientOcclusion()
 
     if (_RayCountEnabled > 0)
     {
-        _RayCountTexture[COORD_TEXTURE2D_X(currentPixelCoord)][RAYCOUNTVALUES_AMBIENT_OCCLUSION] = _RayCountTexture[COORD_TEXTURE2D_X(currentPixelCoord)][RAYCOUNTVALUES_AMBIENT_OCCLUSION] + (uint)numSamples;
         InterlockedAdd(_RayCountBuffer[RAYCOUNTVALUES_AMBIENT_OCCLUSION], (uint)numSamples);
     }
 

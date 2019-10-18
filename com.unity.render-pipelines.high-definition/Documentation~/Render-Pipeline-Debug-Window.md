@@ -61,10 +61,14 @@ The **display stats** panel is only visible in play mode and can be used to debu
 | **Frame Time** | Shows the total frame time for the current camera view. |
 | **RT Mode** | If ray tracing is enabled, shows the ray tracing Tier used during rendering.  |
 | **Count Rays** | Enable the checkbox to count the number of traced rays per effect  |
-| **AO** | The number of rays that were traced for Ambient Occlusion (AO) computations, when RT AO is enabled   |
-| **Shadows** | The number of rays that were traced for shadowing computations, when RT shadows are enabled  |
-| **Reflections** | The number of rays that were traced for reflection computations, when RT reflections are enabled |
-| **Diffuse GI** | The number of rays that were traced for diffuse Global Illumination (GI) computations when Diffuse GI is enabled |
+| **Ambient Occlusion** | The number of rays that were traced for Ambient Occlusion (AO) computations, when RT AO is enabled   |
+| **Shadows Directional** | The number of rays that were traced for directional lights, when RT shadows are enabled  |
+| **Shadows Area** | The number of rays that were traced towards area lights, when RT shadows are enabled  |
+| **Shadows Point/Spot** | The number of rays that were traced towards punctual (point/spot) lights, when RT shadows are enabled  |
+| **Reflection Forward** | The number of rays that were traced for reflection computations using forward shading |
+| **Reflection Deferred** | The number of rays that were traced for reflection computations using deferred shading |
+| **Diffuse GI Forward** | The number of rays that were traced for diffuse Global Illumination (GI) computations using forward shading |
+| **Diffuse GI Deferred** | The number of rays that were traced for diffuse Global Illumination (GI) computations using deferred shading |
 | **Recursive** | The number of rays that were traced for diffuse Global Illumination (GI) computations when recursive RT is enabled |
 
 <a name="MaterialPanel"></a>

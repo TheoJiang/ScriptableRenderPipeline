@@ -20,6 +20,7 @@ namespace UnityEngine.Rendering.HighDefinition
             public bool diffuseLightingOnly;
             public bool halfResolution;
             public int rayCountFlag;
+            public int rayCountType;
             public bool preExpose;
 
             // Camera data
@@ -55,8 +56,7 @@ namespace UnityEngine.Rendering.HighDefinition
             public RTHandle gbuffer3;
             public RTHandle distanceBuffer;
 
-            // Debug textures
-            public RTHandle rayCountTexture;
+            // Debug buffers
             public ComputeBuffer rayCountBuffer;
 
             // Output Buffer
@@ -124,7 +124,6 @@ namespace UnityEngine.Rendering.HighDefinition
             deferredResources.distanceBuffer = m_RaytracingDistanceBuffer;
 
             // Debug textures
-            deferredResources.rayCountTexture = m_RayCountManager.GetRayCountTexture();
             deferredResources.rayCountBuffer = m_RayCountManager.GetRayCountBuffer();
 
             // Output Buffer
@@ -213,10 +212,10 @@ namespace UnityEngine.Rendering.HighDefinition
             // Set the acceleration structure for the pass
             cmd.SetRayTracingAccelerationStructure(parameters.gBufferRaytracingRT, HDShaderIDs._RaytracingAccelerationStructureName, parameters.accelerationStructure);
 
-            // Set ray count tex
+            // Set ray count buffer
             cmd.SetRayTracingIntParam(parameters.gBufferRaytracingRT, HDShaderIDs._RayCountEnabled, parameters.rayCountFlag);
-            cmd.SetRayTracingTextureParam(parameters.gBufferRaytracingRT, HDShaderIDs._RayCountTexture, buffers.rayCountTexture);
             cmd.SetRayTracingBufferParam(parameters.gBufferRaytracingRT, HDShaderIDs._RayCountBuffer, buffers.rayCountBuffer);
+            cmd.SetRayTracingIntParam(parameters.gBufferRaytracingRT, HDShaderIDs._RayCountOffset, parameters.rayCountType);
 
             // Bind all input parameter
             cmd.SetRayTracingFloatParams(parameters.gBufferRaytracingRT, HDShaderIDs._RaytracingRayBias, parameters.rayBias);

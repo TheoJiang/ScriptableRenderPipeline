@@ -126,6 +126,7 @@ namespace UnityEngine.Rendering.HighDefinition
 
             deferredParameters.halfResolution = false;
             deferredParameters.rayCountFlag = m_RayCountManager.RayCountIsEnabled();
+            deferredParameters.rayCountType = (int)RayCountValues.DiffuseGI_Deferred;
             deferredParameters.preExpose = true;
 
             // Camera data
@@ -300,7 +301,6 @@ namespace UnityEngine.Rendering.HighDefinition
             // Set ray count texture
             RayCountManager rayCountManager = GetRayCountManager();
             cmd.SetRayTracingIntParam(indirectDiffuseShader, HDShaderIDs._RayCountEnabled, rayCountManager.RayCountIsEnabled());
-            cmd.SetRayTracingTextureParam(indirectDiffuseShader, HDShaderIDs._RayCountTexture, rayCountManager.GetRayCountTexture());
             cmd.SetRayTracingBufferParam(indirectDiffuseShader, HDShaderIDs._RayCountBuffer, rayCountManager.GetRayCountBuffer());
 
             // Compute the pixel spread value

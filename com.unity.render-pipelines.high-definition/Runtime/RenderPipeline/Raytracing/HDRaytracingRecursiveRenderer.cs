@@ -142,7 +142,6 @@ namespace UnityEngine.Rendering.HighDefinition
             // Set ray count texture
             RayCountManager rayCountManager = GetRayCountManager();
             cmd.SetRayTracingIntParam(forwardShader, HDShaderIDs._RayCountEnabled, rayCountManager.RayCountIsEnabled());
-            cmd.SetRayTracingTextureParam(forwardShader, HDShaderIDs._RayCountTexture, rayCountManager.GetRayCountTexture());
             cmd.SetRayTracingBufferParam(forwardShader, HDShaderIDs._RayCountBuffer, rayCountManager.GetRayCountBuffer());
 
             // Compute an approximate pixel spread angle value (in radians)

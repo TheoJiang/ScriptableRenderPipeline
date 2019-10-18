@@ -53,6 +53,7 @@ RW_TEXTURE2D_X(float4, _GBufferTexture5RW); // shadow mask
 
 int _RaytracingHalfResolution;
 uint _RayTracingLayerMask;
+int _RayCountOffset;  // The offset depends on the type of rays we are tracing (GI / reflections)
 
 [shader("miss")]
 void MissShaderGBuffer(inout RayIntersectionGBuffer rayIntersection : SV_RayPayload)
@@ -105,8 +106,7 @@ void RayGenGBuffer()
 
     if (_RayCountEnabled > 0)
     {
-        _RayCountTexture[COORD_TEXTURE2D_X(currentPixelCoord)][RAYCOUNTVALUES_REFLECTION] = _RayCountTexture[COORD_TEXTURE2D_X(currentPixelCoord)][RAYCOUNTVALUES_REFLECTION] + 1;
-        InterlockedAdd(_RayCountBuffer[RAYCOUNTVALUES_REFLECTION], 1);
+        InterlockedAdd(_RayCountBuffer[_RayCountOffset], 1);
     }
 
     // Read the ray distance
@@ -210,8 +210,7 @@ void RayGenGBufferBinned()
 
     if (_RayCountEnabled > 0)
     {
-        _RayCountTexture[COORD_TEXTURE2D_X(currentPixelCoord)][RAYCOUNTVALUES_REFLECTION] = _RayCountTexture[COORD_TEXTURE2D_X(currentPixelCoord)][RAYCOUNTVALUES_REFLECTION] + 1;
-        InterlockedAdd(_RayCountBuffer[RAYCOUNTVALUES_REFLECTION], 1);
+        InterlockedAdd(_RayCountBuffer[_RayCountOffset], 1);
     }
     
     // Read the ray distance
