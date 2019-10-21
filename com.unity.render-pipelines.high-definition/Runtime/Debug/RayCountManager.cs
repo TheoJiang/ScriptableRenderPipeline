@@ -27,7 +27,7 @@ namespace UnityEngine.Rendering.HighDefinition
     {
         
 #if ENABLE_RAYTRACING
-        // Buffer that holds ray counts (filled directly in the RT shders with atomic operations)
+        // Buffer that holds ray counts (filled directly in the RT shaders with atomic operations)
         ComputeBuffer m_rayCountBuffer = null;
 
         // CPU Buffer that holds the current values
@@ -142,5 +142,5 @@ namespace UnityEngine.Rendering.HighDefinition
             }
         }
 #endif
-        }
     }
+}

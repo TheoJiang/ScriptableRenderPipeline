@@ -23,6 +23,7 @@
 #include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/Raytracing/Shaders/RaytracingCommon.hlsl"
 #include "Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/ScreenSpaceLighting/ScreenSpaceLighting.hlsl"
 #include "Packages/com.unity.render-pipelines.high-definition/Runtime/Debug/RayCountManager.cs.hlsl"
+#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Debug/RayCount.hlsl"
 
 // The target acceleration structure that we will evaluate the reflexion in
 Texture2D<float> _StencilTexture;
@@ -150,10 +151,8 @@ void RayGenReflectionHalfRes()
     rayIntersection.cone.spreadAngle = _RaytracingPixelSpreadAngle + roughnessToSpreadAngle(roughness);
     rayIntersection.cone.width = distanceToCamera * _RaytracingPixelSpreadAngle;
 
-    if (_RayCountEnabled > 0)
-    {
-        InterlockedAdd(_RayCountBuffer[RAYCOUNTVALUES_REFLECTION_FORWARD], 1);
-    }
+    // Keep track of the ray count for the statistics
+    IncrementRayCounter(RAYCOUNTVALUES_REFLECTION_FORWARD, 1);
 
     // Evaluate the ray intersection
     TraceRay(_RaytracingAccelerationStructure, RAY_FLAG_CULL_BACK_FACING_TRIANGLES, RAYTRACINGRENDERERFLAG_REFLECTION, 0, 1, 0, rayDescriptor, rayIntersection);
@@ -265,10 +264,8 @@ void RayGenReflectionFullRes()
     rayIntersection.cone.spreadAngle = _RaytracingPixelSpreadAngle + roughnessToSpreadAngle(roughness);
     rayIntersection.cone.width = distanceToCamera * _RaytracingPixelSpreadAngle;
 
-    if (_RayCountEnabled > 0)
-    {
-        InterlockedAdd(_RayCountBuffer[RAYCOUNTVALUES_REFLECTION_FORWARD], 1);
-    }
+    // Keep track of the ray count for the statistics
+    IncrementRayCounter(RAYCOUNTVALUES_REFLECTION_FORWARD, 1);
 
     // Evaluate the ray intersection
     TraceRay(_RaytracingAccelerationStructure, RAY_FLAG_CULL_BACK_FACING_TRIANGLES, RAYTRACINGRENDERERFLAG_REFLECTION, 0, 1, 0, rayDescriptor, rayIntersection);
@@ -365,10 +362,8 @@ void RayGenIntegration()
         if (dot(sampleDir, normalData.normalWS) <= 0.0)
             continue;
 
-        if (_RayCountEnabled > 0)
-        {
-            InterlockedAdd(_RayCountBuffer[RAYCOUNTVALUES_REFLECTION_FORWARD], 1);
-        }
+        // Keep track of the ray count for the statistics
+        IncrementRayCounter(RAYCOUNTVALUES_REFLECTION_FORWARD, 1);
 
         // Create the ray descriptor for this pixel
         RayDesc rayDescriptor;

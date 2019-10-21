@@ -23,6 +23,7 @@
 #include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/Raytracing/Shaders/RaytracingCommon.hlsl"
 #include "Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/ScreenSpaceLighting/ScreenSpaceLighting.hlsl"
 #include "Packages/com.unity.render-pipelines.high-definition/Runtime/Debug/RayCountManager.cs.hlsl"
+#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Debug/RayCount.hlsl"
 
 // The target acceleration structure that we will evaluate the reflexion in
 Texture2D<float>                        _StencilTexture;
@@ -74,10 +75,8 @@ void RayGenFullRes()
     NormalData normalData;
     DecodeFromNormalBuffer(currentCoord, normalData);
 
-    if (_RayCountEnabled > 0)
-    {
-        InterlockedAdd(_RayCountBuffer[RAYCOUNTVALUES_DIFFUSE_GI_FORWARD], 1);
-    }
+    // Keep track of the number of rays
+    IncrementRayCounter(RAYCOUNTVALUES_DIFFUSE_GI_FORWARD, 1);
     
     // Generate a new sample
     float2 sample;
@@ -160,10 +159,8 @@ void RayGenIntegration()
     // Variable that accumulate the radiance
     float3 finalColor = float3(0.0, 0.0, 0.0);
 
-    if (_RayCountEnabled > 0)
-    {
-        InterlockedAdd(_RayCountBuffer[RAYCOUNTVALUES_DIFFUSE_GI_FORWARD], _RaytracingNumSamples);
-    }
+    // Keep track of the number of rays
+    IncrementRayCounter(RAYCOUNTVALUES_DIFFUSE_GI_FORWARD, _RaytracingNumSamples);
 
     // Loop through the samples and add their contribution
     for (int sampleIndex = 0; sampleIndex < _RaytracingNumSamples; ++sampleIndex)
