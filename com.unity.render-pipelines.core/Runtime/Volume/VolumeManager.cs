@@ -289,7 +289,8 @@ namespace UnityEngine.Rendering
             // Sort the cached volume list(s) for the given layer mask if needed and return it
             var volumes = GrabVolumes(layerMask);
 
-            Camera camera = trigger.GetComponent<Camera>();
+            // Behavior should be fine even if camera is null
+            trigger.TryGetComponent<Camera>(out var camera);
 
 #if UNITY_EDITOR
             // requested or prefab isolation mode.
