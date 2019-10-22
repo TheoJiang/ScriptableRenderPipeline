@@ -205,6 +205,7 @@ namespace UnityEngine.Rendering.HighDefinition
         /// <summary>The proxy settings of the probe for the current volume.</summary>
         public ProxySettings proxySettings;
         /// <summary>Camera settings to use when capturing data.</summary>
+        [Serialization.FormerlySerializedAs("camera")]
         public CameraSettings cameraSettings;
 
         public Hash128 ComputeHash()
